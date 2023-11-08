@@ -1,4 +1,4 @@
-package ar.edu.unlam.pb2.Parcial01;
+package ar.edu.unlam;
 
 public interface Vendible {
 	public String getCodigo();
