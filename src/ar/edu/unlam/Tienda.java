@@ -12,13 +12,17 @@ public class Tienda {
 	private Set<Producto> listadoDeProductos;
 	private Map<Producto, Integer> stockDeProductos;
 	private Set<Cliente> listadoClientes;
+	private Set<Vendedor> listadoVendedores;
+	private Set<Venta> listadoDeVentas;
 
 	public Tienda(String cuit, String nombre) {
 		this.cuit = cuit;
 		this.nombre = nombre;
-		listadoDeProductos = new HashSet<> ();
-		stockDeProductos = new HashMap<> ();
-		listadoClientes = new HashSet<> ();
+		listadoDeProductos = new HashSet<>();
+		stockDeProductos = new HashMap<>();
+		listadoClientes = new HashSet<>();
+		listadoVendedores = new HashSet<>();
+		listadoDeVentas = new HashSet<>();
 	}
 
 	public String getCuit() {
@@ -53,30 +57,45 @@ public class Tienda {
 		this.stockDeProductos = stockDeProductos;
 	}
 
+	public Set<Cliente> getListadoClientes() {
+		return listadoClientes;
+	}
+
+	public void setListadoClientes(Set<Cliente> listadoClientes) {
+		this.listadoClientes = listadoClientes;
+	}
+
+	public Set<Vendedor> getListadoVendedores() {
+		return listadoVendedores;
+	}
+
+	public void setListadoVendedores(Set<Vendedor> listadoVendedores) {
+		this.listadoVendedores = listadoVendedores;
+	}
+
 	public void agregarProducto(Producto producto) {
 		listadoDeProductos.add(producto);
-		
+
 	}
 
 	public Producto getVendible(String codigo) {
 		Producto porductoBuscado = buscarProductoDelListadoPorCodigo(codigo);
 		return porductoBuscado;
 	}
-	
-	public Producto buscarProductoDelListadoPorCodigo (String codigo) {
-		for(Producto prod : listadoDeProductos) {
-			if(prod.getCodigo().equals(codigo)) {
+
+	public Producto buscarProductoDelListadoPorCodigo(String codigo) {
+		for (Producto prod : listadoDeProductos) {
+			if (prod.getCodigo().equals(codigo)) {
 				return prod;
 			}
 		}
 		return null;
 	}
-	
+
 	public void agregarProducto(Producto producto, Integer cantidad) {
 		stockDeProductos.put(producto, cantidad);
-		
+
 	}
-	
 
 	public Integer getStock(Producto producto) {
 		Integer productoBuscado = stockDeProductos.get(producto);
@@ -85,12 +104,12 @@ public class Tienda {
 
 	public void agregarCliente(Cliente cliente) {
 		listadoClientes.add(cliente);
-		
+
 	}
-	
-	public Cliente buscarCliente (String cuit) {
-		for(Cliente cliente : listadoClientes) {
-			if(cliente.getCuit().equals(cuit)) {
+
+	public Cliente buscarCliente(String cuit) {
+		for (Cliente cliente : listadoClientes) {
+			if (cliente.getCuit().equals(cuit)) {
 				return cliente;
 			}
 		}
@@ -101,6 +120,32 @@ public class Tienda {
 		Cliente clienteBuscado = buscarCliente(cuitEjemplo);
 		return clienteBuscado;
 	}
-	
+
+	public void agregarVendedor(Vendedor vendedor) {
+		listadoVendedores.add(vendedor);
+	}
+
+	public Vendedor buscarVendedor(String dni) {
+		for (Vendedor vendedor : listadoVendedores) {
+			if (vendedor.getDni().equals(dni)) {
+				return vendedor;
+			}
+		}
+		return null;
+	}
+
+	public Vendedor getVendedor(String dni) {
+		Vendedor vendedorBuscado = buscarVendedor(dni);
+		return vendedorBuscado;
+	}
+
+	public void agregarVenta(Venta ticket) {
+		listadoDeVentas.add(ticket);
+	}
+
+	public void agregarProductoAVenta(String codigo, Producto producto, Integer cantidadVendida) {
+		
+		
+	}
 	
 }
