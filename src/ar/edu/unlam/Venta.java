@@ -1,8 +1,10 @@
 package ar.edu.unlam;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class Venta {
 
@@ -10,12 +12,14 @@ public class Venta {
 	private Cliente cliente;
 	private Vendedor vendedor;
 	private Map<Producto, Integer> productosVendidos;
+	private Set<Servicio> serviciosVendidos;
 
 	public Venta(String codigo, Cliente cliente, Vendedor vendedor) {
 		this.codigo = codigo;
 		this.cliente = cliente;
 		this.vendedor = vendedor;
 		productosVendidos = new HashMap<> ();
+		serviciosVendidos = new HashSet<> ();
 	}
 
 	public String getCodigo() {
@@ -69,6 +73,11 @@ public class Venta {
 			return false;
 		Venta other = (Venta) obj;
 		return Objects.equals(codigo, other.codigo);
+	}
+
+	public void agregarServicioAlTicket(Servicio servicio) {
+		serviciosVendidos.add(servicio);
+		
 	}
 
 	

@@ -14,6 +14,7 @@ public class Tienda {
 	private Set<Cliente> listadoClientes;
 	private Set<Vendedor> listadoVendedores;
 	private Set<Venta> listadoDeVentas;
+	private Set<Servicio> listadoServicios;
 
 	public Tienda(String cuit, String nombre) {
 		this.cuit = cuit;
@@ -23,6 +24,7 @@ public class Tienda {
 		listadoClientes = new HashSet<>();
 		listadoVendedores = new HashSet<>();
 		listadoDeVentas = new HashSet<>();
+		listadoServicios = new HashSet<>();
 	}
 
 	public String getCuit() {
@@ -101,7 +103,6 @@ public class Tienda {
 		Integer productoBuscado = stockDeProductos.get(producto);
 		return productoBuscado;
 	}
-	
 
 	public void agregarCliente(Cliente cliente) {
 		listadoClientes.add(cliente);
@@ -143,21 +144,41 @@ public class Tienda {
 	public void agregarVenta(Venta ticket) {
 		listadoDeVentas.add(ticket);
 	}
-	
-	public Venta buscarVentaPorCodigo (String codigo) {
-		for(Venta venta : listadoDeVentas) {
-			if(venta.getCodigo().equals(codigo)) {
+
+	public Venta buscarVentaPorCodigo(String codigo) {
+		for (Venta venta : listadoDeVentas) {
+			if (venta.getCodigo().equals(codigo)) {
 				return venta;
 			}
 		}
 		return null;
 	}
 
-	public void agregarProductoAVenta(String codigo, Producto producto, Integer cantidadVendida) {
+	public Boolean comprobarSiLaCantidadAVenderSuperaElStockDisponible(Producto producto, Integer cantidadVendida) throws StockInsuficienteException {
+		Integer stockActualDelProducto = stockDeProductos.get(producto);
+		if (stockActualDelProducto < cantidadVendida) {
+			throw new StockInsuficienteException();
+		}
+		return true;
+	}
+
+	public void agregarProductoAVenta(String codigo, Producto producto, Integer cantidadVendida) throws StockInsuficienteException {
+		comprobarSiLaCantidadAVenderSuperaElStockDisponible(producto, cantidadVendida);
 		Venta ventaEncontrada = buscarVentaPorCodigo(codigo);
 		Integer stockActualDelProducto = stockDeProductos.get(producto);
 		ventaEncontrada.agregarProductoAlTicket(producto, cantidadVendida);
 		stockDeProductos.put(producto, stockActualDelProducto - cantidadVendida);
 	}
-	
+
+	public void agregarServicio(Servicio servicio) {
+		listadoServicios.add(servicio);
+		
+	}
+
+	public void agregarServicioAVenta(String codigo, Servicio servicio) {
+		Venta ventaEncontrada = buscarVentaPorCodigo(codigo);
+		ventaEncontrada.agregarServicioAlTicket(servicio);
+		
+	}
+
 }

@@ -89,7 +89,7 @@ public class testTienda {
 		tienda.agregarProductoAVenta(ticket.getCodigo(), producto, cantidadVendida);
 		
 	}
-	/*
+	
 	@Test
 	public void queSePuedaHacerUnaVentaDeUnServicio() throws VentaInexistenteException, VendibleInexistenteException {
 		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");
@@ -112,7 +112,7 @@ public class testTienda {
 		assertEquals(totalEsperado, totalActual);
 		
 	}
-	
+	/*
 	@Test
 	public void queSePuedaHacerUnaVentaDeUnProductosYServicios() throws VentaInexistenteException, VendibleInexistenteException, StockInsuficienteException {
 		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");
