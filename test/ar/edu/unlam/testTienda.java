@@ -71,7 +71,7 @@ public class testTienda {
 		
 	}
 	
-	/*
+
 	@Test (expected = StockInsuficienteException.class)
 	public void queNoSePuedaAgregarUnaVentaPorStockInsuficiente() throws VentaInexistenteException, VendibleInexistenteException, StockInsuficienteException {
 		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");
@@ -89,7 +89,7 @@ public class testTienda {
 		tienda.agregarProductoAVenta(ticket.getCodigo(), producto, cantidadVendida);
 		
 	}
-	
+	/*
 	@Test
 	public void queSePuedaHacerUnaVentaDeUnServicio() throws VentaInexistenteException, VendibleInexistenteException {
 		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");

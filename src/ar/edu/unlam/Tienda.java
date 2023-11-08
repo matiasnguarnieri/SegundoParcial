@@ -101,6 +101,7 @@ public class Tienda {
 		Integer productoBuscado = stockDeProductos.get(producto);
 		return productoBuscado;
 	}
+	
 
 	public void agregarCliente(Cliente cliente) {
 		listadoClientes.add(cliente);
@@ -142,10 +143,21 @@ public class Tienda {
 	public void agregarVenta(Venta ticket) {
 		listadoDeVentas.add(ticket);
 	}
+	
+	public Venta buscarVentaPorCodigo (String codigo) {
+		for(Venta venta : listadoDeVentas) {
+			if(venta.getCodigo().equals(codigo)) {
+				return venta;
+			}
+		}
+		return null;
+	}
 
 	public void agregarProductoAVenta(String codigo, Producto producto, Integer cantidadVendida) {
-		
-		
+		Venta ventaEncontrada = buscarVentaPorCodigo(codigo);
+		Integer stockActualDelProducto = stockDeProductos.get(producto);
+		ventaEncontrada.agregarProductoAlTicket(producto, cantidadVendida);
+		stockDeProductos.put(producto, stockActualDelProducto - cantidadVendida);
 	}
 	
 }

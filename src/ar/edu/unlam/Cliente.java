@@ -44,6 +44,4 @@ public class Cliente {
 		Cliente other = (Cliente) obj;
 		return Objects.equals(cuit, other.cuit);
 	}
-
-	
 }
