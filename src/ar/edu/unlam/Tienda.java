@@ -172,7 +172,6 @@ public class Tienda {
 
 	public void agregarServicio(Servicio servicio) {
 		listadoServicios.add(servicio);
-		
 	}
 
 	public void agregarServicioAVenta(String codigo, Servicio servicio) {

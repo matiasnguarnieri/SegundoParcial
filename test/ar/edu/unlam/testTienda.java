@@ -1,8 +1,6 @@
 package ar.edu.unlam;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 public class testTienda {
@@ -141,4 +139,48 @@ public class testTienda {
 		assertEquals(totalEsperado, totalActual);
 		
 	}
+	
+	@Test
+	public void queSePuedaEstablecerElPorcentajeDeComisionDeUnVendedor() throws VentaInexistenteException, VendibleInexistenteException, StockInsuficienteException {
+		String dniEjemplo = "12345678";
+		Vendedor vendedor = new Vendedor (dniEjemplo, "Vendedor de ejemplo");
+		Double porcentajeComision = 10.0;
+		vendedor.setPorcentaje(porcentajeComision);
+		
+		Double totalEsperado = 10d;
+		Double totalAcutal = vendedor.getPorcentaje();
+		assertEquals(totalEsperado, totalAcutal);
+	}
+	
+	@Test
+	public void queSeCalculeElMontoTotalDeComisionesQueTieneUnVendedor() throws VentaInexistenteException, VendibleInexistenteException, StockInsuficienteException {
+		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");
+		String cuitCliente = "30123456780";
+		Cliente cliente = new Cliente(cuitCliente, "Cliente de ejemplo");
+		tienda.agregarCliente(cliente);
+		String dniEjemplo = "12345678";
+		Vendedor vendedor = new Vendedor (dniEjemplo, "Vendedor de ejemplo");
+		Double porcentajeComision = 10.0;
+		vendedor.setPorcentaje(porcentajeComision);
+		
+		Venta venta = new Venta("C-0001", cliente, vendedor);
+		tienda.agregarVenta(venta);
+		Vendible vendible;
+		
+		vendible = new Servicio("1", "Servicio Técnico", 100d, "2023-02-01", "2023-03-01");
+		tienda.agregarServicio((Servicio) vendible);
+		tienda.agregarServicioAVenta(venta.getCodigo(), (Servicio) vendible);
+		
+		vendible = new Producto("2", "Producto nuevo", 350d);
+		Integer stockInicial = 10;
+		tienda.agregarProducto((Producto) vendible, stockInicial);
+		Integer cantidadVendida = 2;
+		tienda.agregarProductoAVenta(venta.getCodigo(), (Producto) vendible, cantidadVendida);
+				
+		Double totalEsperado = 80d;
+		Double totalActual = venta.getTotalComisiones();
+		assertEquals(totalEsperado, totalActual);
+		
+	}
+	
 }

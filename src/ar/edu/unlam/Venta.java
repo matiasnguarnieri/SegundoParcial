@@ -19,8 +19,8 @@ public class Venta {
 		this.codigo = codigo;
 		this.cliente = cliente;
 		this.vendedor = vendedor;
-		productosVendidos = new HashMap<> ();
-		serviciosVendidos = new HashSet<> ();
+		productosVendidos = new HashMap<>();
+		serviciosVendidos = new HashSet<>();
 	}
 
 	public String getCodigo() {
@@ -54,7 +54,7 @@ public class Venta {
 	public void setProductosVendidos(Map<Producto, Integer> productosVendidos) {
 		this.productosVendidos = productosVendidos;
 	}
-	
+
 	public void agregarProductoAlTicket(Producto codigo, Integer cantidad) {
 		productosVendidos.put(codigo, cantidad);
 	}
@@ -78,29 +78,33 @@ public class Venta {
 
 	public void agregarServicioAlTicket(Servicio servicio) {
 		serviciosVendidos.add(servicio);
-		
+
 	}
 
 	public Double getTotal() {
 		Double totalProductos = 0.0;
 		Double totalServicios = 0.0;
-		
-		
-		
+
 		for (Entry<Producto, Integer> entry : productosVendidos.entrySet()) {
 			Double valorProducto = entry.getKey().getPrecio();
-            int valor = entry.getValue();
-            totalProductos += valorProducto * valor;
-        }
-		
-		for(Servicio servicio : serviciosVendidos) {
+			int valor = entry.getValue();
+			totalProductos += valorProducto * valor;
+		}
+
+		for (Servicio servicio : serviciosVendidos) {
 			Double valorServicio = servicio.getPrecio();
 			totalServicios += valorServicio;
 		}
-		
+
 		return totalProductos + totalServicios;
 	}
 
-	
-	
+	public Double getTotalComisiones() {
+		Double totalVentas = getTotal();
+		Double porcentajeComision = vendedor.getPorcentaje();
+		Double totalComisiones = totalVentas * porcentajeComision / 100;
+		
+		return totalComisiones;
+	}
+
 }

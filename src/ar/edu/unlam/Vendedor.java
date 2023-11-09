@@ -4,6 +4,7 @@ public class Vendedor {
 
 	private String dni;
 	private String nombre;
+	private Double porcentaje;
 
 	public Vendedor(String dni, String nombre) {
 		this.dni = dni;
@@ -25,7 +26,13 @@ public class Vendedor {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
+
+	public Double getPorcentaje() {
+		return porcentaje;
+	}
+
+	public void setPorcentaje(Double porcentaje) {
+		this.porcentaje = porcentaje;
+	}
 
 }
