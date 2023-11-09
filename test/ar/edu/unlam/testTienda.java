@@ -112,7 +112,7 @@ public class testTienda {
 		assertEquals(totalEsperado, totalActual);
 		
 	}
-	/*
+	
 	@Test
 	public void queSePuedaHacerUnaVentaDeUnProductosYServicios() throws VentaInexistenteException, VendibleInexistenteException, StockInsuficienteException {
 		Tienda tienda = new Tienda("30123456780", "Tienda de ejemplo");
@@ -141,8 +141,4 @@ public class testTienda {
 		assertEquals(totalEsperado, totalActual);
 		
 	}
-	
-	
-	
-*/
 }

@@ -3,6 +3,7 @@ package ar.edu.unlam;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 
@@ -78,6 +79,26 @@ public class Venta {
 	public void agregarServicioAlTicket(Servicio servicio) {
 		serviciosVendidos.add(servicio);
 		
+	}
+
+	public Double getTotal() {
+		Double totalProductos = 0.0;
+		Double totalServicios = 0.0;
+		
+		
+		
+		for (Entry<Producto, Integer> entry : productosVendidos.entrySet()) {
+			Double valorProducto = entry.getKey().getPrecio();
+            int valor = entry.getValue();
+            totalProductos += valorProducto * valor;
+        }
+		
+		for(Servicio servicio : serviciosVendidos) {
+			Double valorServicio = servicio.getPrecio();
+			totalServicios += valorServicio;
+		}
+		
+		return totalProductos + totalServicios;
 	}
 
 	

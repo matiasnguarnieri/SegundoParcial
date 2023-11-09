@@ -1,6 +1,6 @@
 package ar.edu.unlam;
 
-public class Servicio {
+public class Servicio implements Vendible {
 
 	private String id;
 	private String nombre;
@@ -54,6 +54,12 @@ public class Servicio {
 
 	public void setFechaHasta(String fechaHasta) {
 		this.fechaHasta = fechaHasta;
+	}
+
+	@Override
+	public String getCodigo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
